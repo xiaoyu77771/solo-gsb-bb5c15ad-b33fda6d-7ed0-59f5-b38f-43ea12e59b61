@@ -1,0 +1,18 @@
+services:
+  alerts:
+    build: .
+    image: alert-aggregation-service
+    container_name: alert-aggregation-service
+    ports:
+      - "8000:8000"
+    environment:
+      # Silence window (seconds) that groups events of one source into a segment.
+      SILENCE_INTERVAL_SECONDS: "300"
+      # SQLite file location inside the container (persisted via the volume below).
+      DATABASE_PATH: /data/alerts.db
+    volumes:
+      - alerts-data:/data
+    restart: unless-stopped
+
+volumes:
+  alerts-data:

@@ -1,0 +1,1 @@
+"""Alert aggregation service package."""
